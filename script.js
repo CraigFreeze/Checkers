@@ -145,18 +145,21 @@ function getAvailableSpaces() {
     checkAvailableJumpSpaces();
 }
 
+// Allows variable arithmetic in function
 var operators = {
     '+': function(a, b){ return a+b},
     '-': function(a, b){ return a-b}
 }
 
+// Returns Boolean (If Jump is Available) - RED Pieces
 function getRedJumpCondition(index, relativePosition, key) {
-    let jumpCondition = board[operators[key](index, relativePosition)] === null 
-    && cells[operators[key](index, relativePosition)].classList.contains("noPieceHere") !== true 
-    && board[operators[key](index, (relativePosition / 2))] >= 12;
+    let jumpCondition = board[operators[key](index, relativePosition)] === null //Condition 1
+    && cells[operators[key](index, relativePosition)].classList.contains("noPieceHere") !== true //Condition 2
+    && board[operators[key](index, (relativePosition / 2))] >= 12; //Condition 3
     return jumpCondition;
 }
 
+// Returns Boolean (If Jump is Available) - Black Pieces
 function getBlackJumpCondition(index, relativePosition, key) {
     let jumpCondition = board[operators[key](index, relativePosition)] === null 
     && cells[operators[key](index, relativePosition)].classList.contains("noPieceHere") !== true
@@ -197,57 +200,8 @@ function checkAvailableJumpSpaces() {
     }
     checkPieceConditions();
 }
-// ! // gets the moves that the selected piece can jump
-
-// function checkAvailableJumpSpaces() {
-//     if (turn) {
-//         if (board[selectedPiece.indexOfBoardPiece + 14] === null 
-//         && cells[selectedPiece.indexOfBoardPiece + 14].classList.contains("noPieceHere") !== true
-//         && board[selectedPiece.indexOfBoardPiece + 7] >= 12) {
-//             selectedPiece.fourteenthSpace = true;
-//         }
-//         if (board[selectedPiece.indexOfBoardPiece + 18] === null 
-//         && cells[selectedPiece.indexOfBoardPiece + 18].classList.contains("noPieceHere") !== true
-//         && board[selectedPiece.indexOfBoardPiece + 9] >= 12) {
-//             selectedPiece.eighteenthSpace = true;
-//         }
-//         if (board[selectedPiece.indexOfBoardPiece - 14] === null 
-//         && cells[selectedPiece.indexOfBoardPiece - 14].classList.contains("noPieceHere") !== true
-//         && board[selectedPiece.indexOfBoardPiece - 7] >= 12) {
-//             selectedPiece.minusFourteenthSpace = true;
-//         }
-//         if (board[selectedPiece.indexOfBoardPiece - 18] === null 
-//         && cells[selectedPiece.indexOfBoardPiece - 18].classList.contains("noPieceHere") !== true
-//         && board[selectedPiece.indexOfBoardPiece - 9] >= 12) {
-//             selectedPiece.minusEighteenthSpace = true;
-//         }
-//     } else {
-//         if (board[selectedPiece.indexOfBoardPiece + 14] === null 
-//         && cells[selectedPiece.indexOfBoardPiece + 14].classList.contains("noPieceHere") !== true
-//         && board[selectedPiece.indexOfBoardPiece + 7] < 12 && board[selectedPiece.indexOfBoardPiece + 7] !== null) {
-//             selectedPiece.fourteenthSpace = true;
-//         }
-//         if (board[selectedPiece.indexOfBoardPiece + 18] === null 
-//         && cells[selectedPiece.indexOfBoardPiece + 18].classList.contains("noPieceHere") !== true
-//         && board[selectedPiece.indexOfBoardPiece + 9] < 12 && board[selectedPiece.indexOfBoardPiece + 9] !== null) {
-//             selectedPiece.eighteenthSpace = true;
-//         }
-//         if (board[selectedPiece.indexOfBoardPiece - 14] === null && cells[selectedPiece.indexOfBoardPiece - 14].classList.contains("noPieceHere") !== true
-//         && board[selectedPiece.indexOfBoardPiece - 7] < 12 
-//         && board[selectedPiece.indexOfBoardPiece - 7] !== null) {
-//             selectedPiece.minusFourteenthSpace = true;
-//         }
-//         if (board[selectedPiece.indexOfBoardPiece - 18] === null && cells[selectedPiece.indexOfBoardPiece - 18].classList.contains("noPieceHere") !== true
-//         && board[selectedPiece.indexOfBoardPiece - 9] < 12
-//         && board[selectedPiece.indexOfBoardPiece - 9] !== null) {
-//             selectedPiece.minusEighteenthSpace = true;
-//         }
-//     }
-//     checkPieceConditions();
-// }
 
 // restricts movement if the piece is a king
-
 function checkPieceConditions() {
     if (selectedPiece.isKing) {
         givePieceBorder();
